@@ -14,11 +14,9 @@ enthusiasts alike.
    > pip install -r requirements.txt
 2) Run server.py
    > python server.py
-3) Run client.py on the first device
+3) Run client.py
    > python client.py
-4) Run client2.py on the second device
-   > python client.py
-5) Enjoy the game!
+4) Enjoy the game!
 
 ## Gameplay
 

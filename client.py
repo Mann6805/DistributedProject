@@ -187,7 +187,7 @@ def create_particles(position, car):
 
 
 class Car(pygame.sprite.Sprite):
-    def __init__(self, forward_acceleration=0.5, backward_acceleration=0.5, drift_acceleration=1.0,
+    def __init__(self, forward_acceleration=1.0, backward_acceleration=1.0, drift_acceleration=1.0,
                  max_velocity=1.0, friction=1.08, velocity_friction=5, spawn_x=1300, spawn_y=700, color="red",
                  key_f=pygame.K_w, key_b=pygame.K_s, key_r=pygame.K_d, key_l=pygame.K_a, unplayable=False):
         # drift_acceleration from 0.1 to 2, max_velocity should be less than 1.5
@@ -312,7 +312,7 @@ class Car(pygame.sprite.Sprite):
     def turn_left(self, x, y):
         if self.unplayable:
             return
-        angle = int(+(self.drift_acceleration + self.velocity / 3) * math.sqrt(x ** 2 + y ** 2))
+        angle = int(+(self.drift_acceleration + self.velocity / 200) * math.sqrt(x ** 2 + y ** 2))
         self.angle += angle
         self.image = pygame.transform.rotate(self.original_image, self.angle)
         center_x, center_y = self.rect.center  # Save its current center.
@@ -322,7 +322,7 @@ class Car(pygame.sprite.Sprite):
     def turn_right(self, x, y):
         if self.unplayable:
             return
-        angle = int(-(self.drift_acceleration + self.velocity / 3) * math.sqrt(x ** 2 + y ** 2))
+        angle = int(-(self.drift_acceleration + self.velocity / 200) * math.sqrt(x ** 2 + y ** 2))
         self.angle += angle
         self.image = pygame.transform.rotate(self.original_image, self.angle)
         center_x, center_y = self.rect.center  # Save its current center.
@@ -474,10 +474,10 @@ not_all_sprites = pygame.sprite.Group()
 
 if pos[0]:
     car_red = Car(drift_acceleration=0.7, max_velocity=1, color="red", spawn_x=1300, spawn_y=700)
-    car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1400, spawn_y=800, key_r=pygame.K_l,key_b=pygame.K_k,key_l=pygame.K_j, key_f=pygame.K_i, color="blue", unplayable=True)
+    car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1300, spawn_y=750, key_r=pygame.K_l,key_b=pygame.K_k,key_l=pygame.K_j, key_f=pygame.K_i, color="blue", unplayable=True)
 else :
     car_red = Car(drift_acceleration=0.7, max_velocity=1, color="red", spawn_x=1300, spawn_y=700, key_r=pygame.K_l, key_b=pygame.K_k, key_l=pygame.K_j, key_f=pygame.K_i, unplayable=True)
-    car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1400, spawn_y=800, color="blue")
+    car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1300, spawn_y=700, color="blue")
 send_info = [0] * 6
 received_info = [0] * 6
 
