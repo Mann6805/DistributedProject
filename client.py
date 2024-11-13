@@ -64,7 +64,6 @@ class Camera:
 
 def load_image(name, colorkey=None):
     fullname = os.path.join('images', name)
-    # если файл не существует, то выходим
     if not os.path.isfile(fullname):
         sys.exit()
     image = pygame.image.load(fullname)
@@ -188,7 +187,7 @@ def create_particles(position, car):
 
 
 class Car(pygame.sprite.Sprite):
-    def __init__(self, forward_acceleration=1.0, backward_acceleration=1.0, drift_acceleration=1.0,
+    def __init__(self, forward_acceleration=0.5, backward_acceleration=0.5, drift_acceleration=1.0,
                  max_velocity=1.0, friction=1.08, velocity_friction=5, spawn_x=1300, spawn_y=700, color="red",
                  key_f=pygame.K_w, key_b=pygame.K_s, key_r=pygame.K_d, key_l=pygame.K_a, unplayable=False):
         # drift_acceleration from 0.1 to 2, max_velocity should be less than 1.5
@@ -205,7 +204,7 @@ class Car(pygame.sprite.Sprite):
         self.friction = friction
         self.velocity_friction = velocity_friction
         self.original_image = load_image("car_2.png").convert_alpha() if color == "red" else load_image(
-            "car_1.png").convert_alpha()
+            "car_1.png").convert_alpha() if color == "blue" else load_image("car.png").convert_alpha()
         self.image = self.original_image
         self.rect = self.image.get_rect()
         self.rect.x = spawn_x
@@ -475,10 +474,8 @@ not_all_sprites = pygame.sprite.Group()
 
 if pos[0]:
     car_red = Car(drift_acceleration=0.7, max_velocity=1, color="red", spawn_x=1300, spawn_y=700)
-    car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1400, spawn_y=800, key_r=pygame.K_l,
-                   key_b=pygame.K_k,
-                   key_l=pygame.K_j, key_f=pygame.K_i, color="blue", unplayable=True)
-else:
+    car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1400, spawn_y=800, key_r=pygame.K_l,key_b=pygame.K_k,key_l=pygame.K_j, key_f=pygame.K_i, color="blue", unplayable=True)
+else :
     car_red = Car(drift_acceleration=0.7, max_velocity=1, color="red", spawn_x=1300, spawn_y=700, key_r=pygame.K_l, key_b=pygame.K_k, key_l=pygame.K_j, key_f=pygame.K_i, unplayable=True)
     car_blue = Car(drift_acceleration=0.7, max_velocity=1, spawn_x=1400, spawn_y=800, color="blue")
 send_info = [0] * 6

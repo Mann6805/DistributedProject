@@ -13,7 +13,7 @@ except socket.error as e:
     print(f"Binding error: {e}")
     sys.exit()
 
-s.listen(2)
+s.listen(2) #Max listen to 2 players
 print("Waiting for a connection, Server Started")
 
 players = [[True, 1300, 700, 270, False, 0], [False, 1400, 750, 270, False, 0]]

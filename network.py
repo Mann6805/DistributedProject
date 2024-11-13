@@ -11,7 +11,6 @@ class Network:
         self.port = 3485
         self.addr = (self.server, self.port)
         self.pos = None
-        
         # Attempt to connect and set the initial position
         self.connect()
 
